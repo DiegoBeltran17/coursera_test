@@ -1,23 +1,17 @@
 <!-- You must include this JavaScript file -->
 <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
-
+<input type="file" id="input" />
 <script>
-	function openExcelFile(strFilePath) {
-    if (window.ActiveXObject) {
-        try {
-            var objExcel;
-            objExcel = new ActiveXObject("Excel.Application");
-            objExcel.Visible = true;
-            objExcel.Workbooks.Open(strLocation, false, [readonly: true|false]);
-        }
-        catch (e) {
-            alert (e.message);
-        }
-    }
-    else {
-        alert ("Your browser does not support this.");
-    }
-}
+	import readXlsxFile from 'read-excel-file'
+
+const input = document.getElementById('input')
+
+input.addEventListener('change', () => {
+  readXlsxFile(input.files[0]).then((data) => {
+    // `data` is an array of rows
+    // each row being an array of cells.
+  })
+})
 </script>
 
 <!-- For the full list of available Crowd HTML Elements and their input/output documentation,
