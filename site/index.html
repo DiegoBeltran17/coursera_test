@@ -1,47 +1,23 @@
 <!-- You must include this JavaScript file -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es" dir="ltr">
+<!DOCTYPE >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>titulo</title>
-<script type="text/javascript">
-function caca()
-{
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("caca").innerHTML=xmlhttp.responseText;
-    }else{document.getElementById("caca").innerHTML="cargando...";}
-  }
-xmlhttp.open("GET","datose.csv",true);
-xmlhttp.send();
-}
-
-
-
-
+<<div id="tabla"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+d3.text("../Desktop/Copias Diego/Espol/Metodologia de Investigacion/Proyecto/Final Corregido/Aumentar TweetsLeer.csv", function(data) {
+var parsedCSV = d3.csv.parseRows(data);
+var container = d3.select("#tabla")
+.append("table")
+.selectAll("tr")
+.data(parsedCSV).enter()
+.append("tr")
+.selectAll("td")
+.data(function(d) {return d;}).enter()
+.append("td")
+.text(function(d) {return d;});
+});
 </script>
-</head>
-<style type="text/css">
-#caca{background-color:#CCC;
-margin:0px auto;
-width:500px;
-padding:10px 10px 10px 10px;
-cursor:pointer;
-}
-</style>
-<body>
-<div id='caca' onclick='caca();'>VER EL ARCHIVO</div>
 
-</body>
 </html>
