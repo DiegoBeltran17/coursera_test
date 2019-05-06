@@ -6,7 +6,7 @@
 <<div id="tabla"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-d3.text("../Desktop/Copias Diego/Espol/Metodologia de Investigacion/Proyecto/Final Corregido/Aumentar TweetsLeer.csv", function(data) {
+d3.text("Aumentar TweetsLeer.csv", function(data) {
 var parsedCSV = d3.csv.parseRows(data);
 var container = d3.select("#tabla")
 .append("table")
