@@ -5,7 +5,190 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<input type="file" id="input" />
+	<div id="page-wrapper">
+<div>
+    Seleccionar Archivo: 
+    <input type="file" id="fileInput">
+</div>
+
+    <input type = 'text' value= '1' id='txtLote' onkeypress="return         runScript(event)"  onkeyup="runScript(event)"style="text-align:right;"/>
+
+<pre id="fileDisplayArea"></pre>
+    <div id="divData" style="font-size:50px">
+
+    </div>
+</div>
+<style>
+    input:focus { 
+       background-color: yellow;
+    }
+    body{
+        font-family: courier;
+   }
+.tbl{font-size:50px;
+font-weight: bold}
+</style>
+<script>
+var nwLote = 0;
+var array;
+var maxArray;
+document.getElementById("txtLote").focus();
+document.getElementById("txtLote").select();
+
+function runScript(e) 
+{ 
+    if (e.keyCode == 13)
+        {
+    var tb = document.getElementById("txtLote");
+    nwLote = tb.value;
+    if (nwLote > maxArray)
+    {
+        nwLote = maxArray;
+    }
+    if (nwLote < 1)
+    {
+        nwLote = 1;
+    }
+    mostrarDato(nwLote);
+    return false;
+}
+if (e.keyCode == 43) // +
+{
+    nwLote = + nwLote + 1;
+    if (nwLote > maxArray)
+    {
+        nwLote = maxArray;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+}
+if (e.keyCode == 45) // -
+{
+    nwLote = nwLote - 1;
+    if (nwLote < 1)
+    {
+        nwLote = 1;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+    }
+    if (e.keyCode == 39) // derecha
+    {
+    nwLote = + nwLote + 1;
+    if (nwLote > maxArray)
+    {
+        nwLote = maxArray;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+}
+    if (e.keyCode == 37) // izquierda
+    {
+     nwLote = nwLote - 1;
+    if (nwLote < 1)
+    {
+        nwLote = 1;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+}
+    if (e.keyCode == 38) // arriba
+    {
+    nwLote = + nwLote + 1;
+    if (nwLote > maxArray)
+    {
+        nwLote = maxArray;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+}
+    if (e.keyCode == 40) // abajo
+    {
+    nwLote = nwLote - 1;
+    if (nwLote < 1)
+    {
+        nwLote = 1;
+    }
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);
+    return false;
+}
+    if (e.keyCode == 36) // home
+    {
+    nwLote = 1;
+    document.getElementById("txtLote").value=nwLote;       
+    mostrarDato(nwLote);
+    return false;
+}
+    if (e.keyCode == 35) // end
+    {
+    nwLote = maxArray;  
+    document.getElementById("txtLote").value=nwLote;    
+    mostrarDato(nwLote);       
+    return false;
+}
+    return true;
+}
+function mostrarDato(nwLote){
+var divData = document.getElementById('divData');
+var string = array[nwLote-1] ;
+var array1 = string.split(",");
+var contenido = "<table class='tbl'>";
+contenido += "<tr><td>LOTE</td><td>" + array1[0] + "</td></tr>";
+contenido += "<tr><td>DETALLE</td><td>" + array1[1] + "</td></tr>";
+contenido += "<tr><td>CANTIDAD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>" + array1[2] + "</td></tr>";
+contenido += "<tr><td>BASE</td><td>" + array1[3] + "</td></tr>";
+contenido += "<tr><td>REMITE</td><td>" + array1[6] + "</td></tr>";
+contenido += "<tr><td>REMITO</td><td>" + array1[4] + "</td></tr>";
+contenido += "<tr><td>RENGLON</td><td>" + array1[5] + "</td></tr>";
+contenido += "</table>";
+
+divData.innerHTML = contenido;
+document.getElementById("txtLote").focus();
+document.getElementById("txtLote").select();    
+}
+window.onload = function() {
+    var fileInput = document.getElementById('fileInput');
+    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+    fileInput.addEventListener('change', function(e) {
+    var file = fileInput.files[0];
+    var textType = /text.*/;
+
+    if (file.type.match(textType)) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var string = reader.result ;
+            array = string.split("|");
+            maxArray = array.length-1;
+            var string1 = array[0] ;
+            var array1 = string1.split(",");
+            var contenido = "<table class='tbl'>";
+            contenido += "<tr><td>LOTE</td><td>" + array1[0] + "</td></tr>";
+            contenido += "<tr><td>DETALLE</td><td>" + array1[1] + "</td>        </tr>";
+            contenido += "<tr><td>CANTIDAD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>" + array1[2] + "</td></tr>";
+            contenido += "<tr><td>BASE</td><td>" + array1[3] + "</td></tr>";
+            contenido += "<tr><td>REMITE</td><td>" + array1[6] + "</td></tr>";
+            contenido += "<tr><td>REMITO</td><td>" + array1[4] + "</td></tr>";
+            contenido += "<tr><td>RENGLON</td><td>" + array1[5] + "</td></tr>";
+            contenido += "</table>";
+            divData.innerHTML = contenido;
+            document.getElementById("txtLote").focus();
+            document.getElementById("txtLote").select();
+        }
+
+        reader.readAsText(file);    
+    } else {
+        fileDisplayArea.innerText = "File not supported!"
+    }
+});
+}
+</script>
 </head>
 <body>
 <!-- For the full list of available Crowd HTML Elements and their input/output documentation,
