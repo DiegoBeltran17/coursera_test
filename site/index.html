@@ -1,7 +1,24 @@
 <!-- You must include this JavaScript file -->
 <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
-
+<script>
+	function openExcelFile(strFilePath) {
+    if (window.ActiveXObject) {
+        try {
+            var objExcel;
+            objExcel = new ActiveXObject("Excel.Application");
+            objExcel.Visible = true;
+            objExcel.Workbooks.Open(strLocation, false, [readonly: true|false]);
+        }
+        catch (e) {
+            alert (e.message);
+        }
+    }
+    else {
+        alert ("Your browser does not support this.");
+    }
+}
+</script>
 
 <!-- For the full list of available Crowd HTML Elements and their input/output documentation,
       please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
