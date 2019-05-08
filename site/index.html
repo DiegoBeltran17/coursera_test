@@ -20,7 +20,12 @@
 
     <div id="employee_table">
     </div>
-    <script>
+     <div>
+    <p></p>
+    <p><input type="hidden" value="" name="test" id="test"></p>
+    <crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox>
+  </div>
+<script>
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
@@ -28,19 +33,24 @@ $(document).ready(function(){
    dataType:"text",
    success:function(data)
    {
+   	var linea = "";
     var employee_data = data.split(/\r?\n|\r/);
     var table_data = '<table class="table table-bordered table-striped">';
     for(var count = 0; count<employee_data.length; count++)
     {
      var cell_data = employee_data[count].split(",");
-     document.getElementsByName("test").value = cell_data[0];
+     linea = cell_data;
+     document.getElementsByName("test").value = linea;
      table_data += '<tr>';
      for(var cell_count=0; cell_count<cell_data.length; cell_count++)
      {
+     	
       if(count === 0)
       {
 
        table_data += '<th>'+cell_data[cell_count]+'</th>';
+
+
       }
       else
       {
@@ -49,17 +59,41 @@ $(document).ready(function(){
       }
      }
      /*document.write(cell_data)[0];*/
-     table_data += '</tr>';
+     /*table_data += '</tr>';*/
     }
     table_data += '</table>';
+         /*document.write(table_data);*/
     $('#employee_table').html(table_data);
+     /*var variable=document.getElementsByTagName("td");
+         document.getElementById("prueba").innerHTML = variable[0].innerHTML;*/
+
+         /*var variable=document.getElementsByTagName("td")[0].innerHTML;
+         document.getElementById("prueba").innerHTML = variable;*/
+	
+	$("#employee_table tr").find('td:eq(1)').each(function () {
+	 
+	 //obtenemos el valor de la celda
+	  valor = $(this).html();
+	  /*var variable=document.getElementsByTagName("td")[valor].innerHTML;*/
+      document.getElementById("prueba").innerHTML = valor;
+	
+	});
+
+
+
+
+
+
    }
   });
+ 
+
  });
  
 });
-</script>
 
+</script>
+<p id="prueba"></p>
     <crowd-form answer-format="flatten-objects">
 
   <crowd-instructions link-text="View instructions" link-type="button">
@@ -85,7 +119,7 @@ $(document).ready(function(){
 
   
   <div>
-    <p>cell_data</p>
+    <p></p>
     <p><input type="hidden" value="" name="test" id="test"></p>
     <crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox>
   </div>
