@@ -29,7 +29,7 @@
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
-   url:"employee.csv",
+   url:"sample1total.csv",
    dataType:"text",
    success:function(data)
    {
@@ -69,18 +69,27 @@ $(document).ready(function(){
 
          /*var variable=document.getElementsByTagName("td")[0].innerHTML;
          document.getElementById("prueba").innerHTML = variable;*/
-	
-	$("#employee_table tr").find('td:eq(1)').each(function () {
+	var tweets ="";
+	$("#employee_table tr").find('td:eq(6)').each(function () {
 	 
 	 //obtenemos el valor de la celda
 	  valor = $(this).html();
+	  tweets += valor + ",";
+
 	  /*var variable=document.getElementsByTagName("td")[valor].innerHTML;*/
-      document.getElementById("prueba").innerHTML = valor;
+      /*document.getElementById("prueba").innerHTML = tweets;*/
+    var tweets_leido ="";
+	var lista_tweets = tweets.split(",");
+	
+	document.getElementById("prueba").innerHTML = tweets;
+	/*for (var i = 0; i < lista_tweets.length; i++) {
+		document.write(lista_tweets[i]);
+	}*/
+
 	
 	});
 
-
-
+	
 
 
 
@@ -93,7 +102,8 @@ $(document).ready(function(){
 });
 
 </script>
-<p id="prueba"></p>
+<p id="prueba"><crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox> </p>
+
     <crowd-form answer-format="flatten-objects">
 
   <crowd-instructions link-text="View instructions" link-type="button">
@@ -119,7 +129,6 @@ $(document).ready(function(){
 
   
   <div>
-    <p></p>
     <p><input type="hidden" value="" name="test" id="test"></p>
     <crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox>
   </div>
