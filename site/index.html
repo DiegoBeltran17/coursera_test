@@ -23,8 +23,11 @@
      <div>
     <p></p>
     <p><input type="hidden" value="" name="test" id="test"></p>
-    <crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox>
   </div>
+
+<!--Codigo para leer archivos csv en java, no pude encontrar para html, 
+encontre para que abrir una ventana y escoger, pero ne me funcionaba. -->
+
 <script>
 $(document).ready(function(){
  $('#load_data').click(function(){
@@ -63,12 +66,16 @@ $(document).ready(function(){
     }
     table_data += '</table>';
          /*document.write(table_data);*/
+
+
+   /*convierte la tabla de datos en html */      
     $('#employee_table').html(table_data);
-     /*var variable=document.getElementsByTagName("td");
-         document.getElementById("prueba").innerHTML = variable[0].innerHTML;*/
 
          /*var variable=document.getElementsByTagName("td")[0].innerHTML;
          document.getElementById("prueba").innerHTML = variable;*/
+
+
+    /*este codigo me permite leer una columna de la tabla, en nuestro caso es la de texto de tweets*/
 	var tweets ="";
 	$("#employee_table tr").find('td:eq(6)').each(function () {
 	 
@@ -78,10 +85,16 @@ $(document).ready(function(){
 
 	  /*var variable=document.getElementsByTagName("td")[valor].innerHTML;*/
       /*document.getElementById("prueba").innerHTML = tweets;*/
+
     var tweets_leido ="";
+
+    /*esto es para acerlo un array list*/
 	var lista_tweets = tweets.split(",");
 	
+	/*codigo me permite sacar la variable de java a html*/
 	document.getElementById("prueba").innerHTML = tweets;
+
+	/*esto es para recorrer la lista, pero al colocar el codigo para sacar la variable a html no me muestra.*/
 	/*for (var i = 0; i < lista_tweets.length; i++) {
 		document.write(lista_tweets[i]);
 	}*/
@@ -102,6 +115,9 @@ $(document).ready(function(){
 });
 
 </script>
+<!--En esta parte tengo problemas para poder obtener los tweets individualmente, porque en el id="prueba" esta ya puede ser un array o un string separado por ",", es caso es que cuando recorro el array en java no puedo sacar los tweets uno por uno al html.
+Lo que se podria hacer es colocar un chebox de java, pero no el que utiliza amazon.
+Otra forma seria poder inclir el codigo html a java, pero no se como. -->
 <p id="prueba"><crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox> </p>
 
     <crowd-form answer-format="flatten-objects">
@@ -126,8 +142,6 @@ $(document).ready(function(){
       <p>Explain why it's a bad answer</p>
     </negative-example>
   </crowd-instructions>
-
-  
   <div>
     <p><input type="hidden" value="" name="test" id="test"></p>
     <crowd-checkbox name="likeBirds" checked="false" required></crowd-checkbox>
